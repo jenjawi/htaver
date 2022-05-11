@@ -1,0 +1,129 @@
+<!doctype html>
+<!--
+<htmlApplication
+  fixedSize="yes"
+  width=900
+  height=500
+  contextmenu="no"
+  hidden="no"
+  menu="no" />
+-->
+<html>
+<head>
+<title>NIN verification</title>
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" type="text/css" href="verify.css">
+
+<style>
+body {  font-family: 'Segoe UI'; font-size: 10pt; }
+</style>
+
+<script type="text/javascript">
+function getdData(c)
+{
+  
+  var oShell=new ActiveXObject("Wscript.Shell");
+  //shell.RegWrite("HKCU\\Software\\HtmlApplicationByVbsedit\\Registry\\currentpath",path);
+ //var NINinp;
+ //var url ;
+ 
+ //NINinp = document.getElementById("NINinp");
+ //cmd = "cmd.exe " +"/c " +"curl " + sUrl +" >cdata ";
+ try{
+  oShell.Exec(c);
+  }catch(er){ alert(er); }
+}
+
+let NINinp;
+var sUrl;
+var spinfo;
+var cmd;
+var Nunit;
+var contentDiv1;
+var bGoodNIN;
+var NIN;
+bGoodNIN = false;
+var bLoaded;
+bLoaded = false;
+
+
+
+
+function onloaded(){
+//alert("loaded");
+spinfo = document.getElementById("spinfo");
+window.NINinp = document.getElementById("NINinp");
+bLoaded = true;
+
+}
+
+
+// check if component are loaded
+if(bLoaded){
+ 
+ //sfo = document.getElementById("spinfo");
+
+//chek NIN input
+
+
+}//bloaded
+
+
+function fFetchData(){
+let NINinp;
+NINinp = document.getElementById("NINinp");
+
+if(Number( NINinp.value ) && NINinp.value.length == 11 ){bGoodNIN = true ;
+NIN = NINinp.value ;
+sUrl =( "http://52.15.120.183/verify.php?pickNIN="+NIN+"&key=ZebraW3ta$ "+"--output "+ "c:\verify\data ");
+cmd = "cmd.exe " +"/c " +"curl " + sUrl ;
+//alert('all good');
+ }
+
+
+  if( bGoodNIN ){
+  getdData(cmd);
+  postInfo();
+  
+  }else{
+  alert("please check the NIN " );
+  }
+  //document.getElementById("content").style.height=(window.innerHeight-document.getElementById("header").offsetHeight) + "px";
+  
+}
+
+function postInfo(){
+var postArea = document.getElementById("content");
+
+var oFso=new ActiveXObject("Scripting.FileSystemObject");
+
+try{
+var otxtStream = oFso.OpenTextFile("data", 1);
+var data = otxtStream.readAll()
+//alert("postdata"); 
+}catch(err){ alert(err); }
+}
+
+
+</script>
+
+</head>
+<body onload="onloaded()">
+<div id="header">
+<div class="header" id="location"><input type="text"  maxlength="11"placeholder="NIN" id="NINinp">
+                    <button type="button" id="btnVerify" onClick="fFetchData()">Verify</button>
+                    <span id="spinfo" style="padding-left:200px;color:red;">info</span>
+                  <span style="float:right;color:red;padding-right:15px;">Unit:<span id="unit">00</span></span></div>
+</div>
+<div id="content" class="contents1">
+  <div id="leftcontent" style="background-color:white;width: 50%; float:left;word-wrap:break-word;">
+  <div class="drive" ><span>first name: jude</span></div>
+   #left content in here
+  </div>
+
+  <div id="rightcontent" style="background-color:white;width: 50%; float:right;word-wrap:break-word;">
+   #right content in there
+  </div>
+</div></body>
+</html>
